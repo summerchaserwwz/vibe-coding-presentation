@@ -23,7 +23,7 @@
     --bg-card: var(--nord2);
     --text-main: var(--nord4);
     --border-color: var(--nord3);
-    --sidebar-width: clamp(220px, 14vw, 280px);
+    --sidebar-width: clamp(208px, 13vw, 252px);
     --slide-pad-x: clamp(1rem, 1.9vw, 2.25rem);
     --slide-pad-y: clamp(0.9rem, 1.6vh, 1.5rem);
     --bottom-bar-height: 50px;
@@ -56,24 +56,24 @@ body {
 .mt-2 { margin-top: 0.5rem; } .mt-4 { margin-top: 0.8rem; } .mt-6 { margin-top: 1.2rem; } .mb-4 { margin-bottom: 0.8rem; } .mb-6 { margin-bottom: 1.2rem; }
 
 /* Sidebar */
-.sidebar { background: var(--bg-panel); border-right: 1px solid var(--border-color); padding: 2rem 1.5rem; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.sidebar { background: var(--bg-panel); border-right: 1px solid var(--border-color); padding: 1.7rem 1.2rem; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 .sidebar-right { border-right: none; border-left: 1px solid var(--border-color); }
 
-.brand { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.brand { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1.6rem; }
 .brand-hexagon { color: var(--accent-blue); width: 28px; height: 28px; filter: drop-shadow(0 0 8px rgba(189,224,254,0.6)); }
 .brand h2 { font-family: 'JetBrains Mono'; font-size: 1.3rem; color: var(--nord6); font-weight: 500; text-shadow: 0 0 8px rgba(255,255,255,0.2); }
 
 /* Tabs */
-.tabs { display: flex; flex-direction: column; gap: 0.4rem; flex-grow: 1; min-height: 0; overflow: auto; padding-right: 0.25rem; }
-.tab { position: relative; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid transparent; overflow: hidden; display: flex; flex-direction: column; transition: background 0.2s; }
+.tabs { display: flex; flex-direction: column; gap: 0.35rem; flex-grow: 1; min-height: 0; overflow: auto; padding-right: 0.2rem; }
+.tab { position: relative; padding: 0.72rem 0.88rem; border-radius: 8px; border: 1px solid transparent; overflow: hidden; display: flex; flex-direction: column; transition: background 0.2s; }
 .tab:hover { background: var(--nord2); }
 .tab.active { background: var(--nord2); border-color: rgba(189, 224, 254, 0.5); box-shadow: 0 0 16px rgba(189, 224, 254, 0.3); }
 .tab-progress-bg { position: absolute; bottom: 0; left: 0; height: 3px; width: 100%; background: transparent; }
 .tab.active .tab-progress-bg { background: rgba(189, 224, 254, 0.2); }
 .tab-progress-fill { height: 100%; background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); transition: width 0.3s ease; }
-.tab-index { font-family: 'JetBrains Mono'; font-size: 0.72rem; color: var(--nord4); margin-bottom: 4px; opacity: 0.6; }
+.tab-index { font-family: 'JetBrains Mono'; font-size: 0.68rem; color: var(--nord4); margin-bottom: 3px; opacity: 0.6; }
 .tab.active .tab-index { color: var(--accent-cyan); opacity: 1; font-weight: bold; text-shadow: 0 0 6px rgba(162, 210, 255, 0.5); }
-.tab-text { font-size: 0.75rem; line-height: 1.38; color: var(--nord4); opacity: 0.8; }
+.tab-text { font-size: 0.71rem; line-height: 1.34; color: var(--nord4); opacity: 0.8; }
 .tab.active .tab-text { opacity: 1; color: var(--nord6); font-weight: 500; text-shadow: 0 0 5px rgba(255,255,255,0.1); }
 
 .part-status { position: absolute; right: 1rem; top: 1rem; font-family: 'JetBrains Mono'; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; }
@@ -87,14 +87,14 @@ body {
 .status-dot.online { background: var(--accent-yellow); color: var(--accent-yellow); }
 
 /* Timeline Right Outline */
-.outline-title { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono'; font-size: 0.76rem; color: var(--nord5); margin-bottom: 1.5rem; opacity: 0.9; text-shadow: 0 0 4px rgba(255,255,255,0.1); }
+.outline-title { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: var(--nord5); margin-bottom: 1.2rem; opacity: 0.9; text-shadow: 0 0 4px rgba(255,255,255,0.1); }
 .timeline-container { position: relative; padding-left: 10px; min-height: 0; overflow: auto; padding-right: 0.35rem; }
 .sidebar-right .timeline-container { flex: 1; }
 .timeline-container::before { content: ''; position: absolute; left: 15px; top: 10px; bottom: 20px; width: 2px; background: var(--nord3); }
-.timeline-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem; position: relative; cursor: pointer; }
+.timeline-item { display: flex; align-items: flex-start; gap: 0.85rem; margin-bottom: 1rem; position: relative; cursor: pointer; }
 .timeline-node { width: 12px; height: 12px; border-radius: 50%; background: var(--nord2); border: 2px solid var(--nord3); margin-top: 4px; z-index: 2; transition: all 0.3s; }
 .timeline-node.small { width: 8px; height: 8px; margin-left: 2px; margin-top: 6px; }
-.timeline-label { color: var(--nord4); font-size: 0.74rem; opacity: 0.7; transition: opacity 0.3s; line-height: 1.36; }
+.timeline-label { color: var(--nord4); font-size: 0.71rem; opacity: 0.7; transition: opacity 0.3s; line-height: 1.34; }
 .timeline-item.active-sub .timeline-node { background: var(--nord0); border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(162, 210, 255, 0.8); }
 .timeline-item.active-sub .timeline-label { opacity: 1; color: var(--accent-cyan); font-weight: bold; text-shadow: 0 0 6px rgba(162,210,255,0.4); }
 
@@ -289,6 +289,13 @@ body {
 .slide-fit-body > * {
     width: 100%;
     min-width: 0;
+}
+
+.slide-fit-body img,
+.slide-fit-body svg {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .slide-fit-body > .layout-2col,
@@ -559,6 +566,292 @@ body {
     font-size: 0.82rem !important;
 }
 
+/* Part 1.4：让三层变化卡和协作链路真正撑满中段画布。 */
+.slide[data-slide-index="5"] .slide-fit-body {
+    justify-content: space-between;
+    gap: 0.95rem;
+}
+
+.slide[data-slide-index="5"] .shifts-list {
+    flex: 1 1 auto;
+    gap: 0.95rem;
+}
+
+.slide[data-slide-index="5"] .shift-item {
+    min-height: 6.4rem;
+    padding: 1rem 1.15rem;
+    gap: 1.1rem;
+}
+
+.slide[data-slide-index="5"] .shift-badge {
+    align-self: flex-start;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+}
+
+.slide[data-slide-index="5"] .shift-content h4 {
+    font-size: 1.04rem;
+    margin-bottom: 0.45rem;
+}
+
+.slide[data-slide-index="5"] .shift-content p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.slide[data-slide-index="5"] .slide-fit-body > .fade-up.delay-3 {
+    padding: 1rem 1.2rem !important;
+}
+
+.slide[data-slide-index="5"] .slide-fit-body > .fade-up.delay-3 .agent-box {
+    min-width: 7.2rem;
+    padding: 0.95rem 1rem !important;
+    font-size: 0.82rem !important;
+}
+
+.slide[data-slide-index="5"] .slide-fit-body > .fade-up.delay-3 .agent-box strong {
+    font-size: 1.02rem;
+}
+
+.slide[data-slide-index="5"] .slide-fit-body > .fade-up.delay-3 [style*="font-size:1.1rem"] {
+    font-size: 1.35rem !important;
+}
+
+.slide[data-slide-index="5"] .slide-fit-body > .fade-up.delay-3 [style*="font-size:0.65rem"] {
+    font-size: 0.76rem !important;
+}
+
+.slide[data-slide-index="5"] .slide-fit-body > .fade-up.delay-3 [style*="font-size:0.6rem"],
+.slide[data-slide-index="5"] .slide-fit-body > .fade-up.delay-3 [style*="font-size:0.58rem"] {
+    font-size: 0.72rem !important;
+}
+
+.slide[data-slide-index="5"] .glass-text {
+    font-size: 0.98rem !important;
+    line-height: 1.6;
+}
+
+/* Part 1.5：放大右侧多 Agent 管线，同时把左图做成真正的主视觉。 */
+.slide[data-slide-index="6"] .slide-fit-body {
+    justify-content: center;
+}
+
+.slide[data-slide-index="6"] .layout-2col {
+    flex: 1 1 auto;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    align-items: stretch !important;
+    gap: 1.3rem !important;
+}
+
+.slide[data-slide-index="6"] .layout-2col > .col:first-child {
+    justify-content: flex-start;
+}
+
+.slide[data-slide-index="6"] .layout-2col > .col:first-child img {
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    object-fit: contain;
+    object-position: center center;
+    border-radius: 10px;
+    background: transparent;
+    padding: 0;
+    transform: none;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+}
+
+.slide[data-slide-index="6"] .layout-2col > .col:last-child {
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.slide[data-slide-index="6"] .layout-2col > .col:last-child > div:first-child {
+    flex: 1 1 auto;
+    padding: 1rem 1.1rem !important;
+}
+
+.slide[data-slide-index="6"] .layout-2col > .col:last-child > div:first-child > div:first-child {
+    font-size: 0.78rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.slide[data-slide-index="6"] .anim-flow {
+    height: 9.5rem !important;
+}
+
+.slide[data-slide-index="6"] .anim-flow .agent-box {
+    min-width: 6.6rem;
+    padding: 0.8rem 0.9rem !important;
+    font-size: 0.8rem !important;
+}
+
+.slide[data-slide-index="6"] .anim-flow .agent-box div[style*="font-size:1rem"] {
+    font-size: 1.3rem !important;
+}
+
+.slide[data-slide-index="6"] .anim-flow .agent-box div[style*="font-size:0.6rem"],
+.slide[data-slide-index="6"] .anim-flow .agent-box div[style*="font-size:0.55rem"] {
+    font-size: 0.69rem !important;
+}
+
+.slide[data-slide-index="6"] .comp-list {
+    font-size: 0.88rem !important;
+    line-height: 1.75 !important;
+    padding-left: 0.95rem;
+}
+
+.slide[data-slide-index="6"] .comp-list li {
+    font-size: 0.88rem !important;
+    margin-bottom: 0.7rem;
+}
+
+/* Part 2.3：上方生态卡略收，底部决策树明显放大并吃掉中部空白。 */
+.slide[data-slide-index="9"] .slide-fit-body {
+    justify-content: space-between;
+    gap: 0.9rem;
+}
+
+.slide[data-slide-index="9"] .pillars-container {
+    flex: 0 0 auto;
+    gap: 0.9rem !important;
+}
+
+.slide[data-slide-index="9"] .pillar-card {
+    padding: 1.05rem 0.95rem 1rem !important;
+    gap: 0.55rem;
+}
+
+.slide[data-slide-index="9"] .pillar-card > div:first-child {
+    height: 92px !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.slide[data-slide-index="9"] .pillar-card h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.2rem;
+}
+
+.slide[data-slide-index="9"] .pillar-desc {
+    gap: 0.35rem;
+}
+
+.slide[data-slide-index="9"] .pillar-desc,
+.slide[data-slide-index="9"] .pillar-desc p,
+.slide[data-slide-index="9"] .pillar-desc div {
+    font-size: 0.82rem !important;
+    line-height: 1.48 !important;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 1.15rem !important;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 > div:first-child {
+    font-size: 0.76rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 > div:last-child {
+    gap: 0.95rem !important;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 > div:last-child > div {
+    gap: 0.5rem !important;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 .agent-box {
+    min-height: 4.65rem;
+    padding: 0.7rem 0.85rem !important;
+    font-size: 0.74rem !important;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 .agent-box strong {
+    font-size: 0.94rem;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 [style*="font-size:0.63rem"] {
+    font-size: 0.74rem !important;
+}
+
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 [style*="font-size:0.58rem"],
+.slide[data-slide-index="9"] .slide-fit-body > .fade-up.delay-3 [style*="font-size:0.55rem"] {
+    font-size: 0.66rem !important;
+}
+
+/* Part 2.4-2.6：上半区整体放大，下方速查流转图不再悬空。 */
+.slide[data-slide-index="10"] .slide-fit-body {
+    justify-content: center;
+}
+
+.slide[data-slide-index="10"] .layout-2col {
+    flex: 1 1 auto;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    align-items: stretch !important;
+    gap: 1.2rem !important;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col {
+    justify-content: space-between;
+    gap: 0.85rem;
+}
+
+.slide[data-slide-index="10"] h3 {
+    font-size: 0.96rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.slide[data-slide-index="10"] .tech-table {
+    font-size: 0.84rem;
+}
+
+.slide[data-slide-index="10"] .tech-table th,
+.slide[data-slide-index="10"] .tech-table td {
+    padding: 10px 12px;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col:first-child > div:last-child {
+    flex: 1 1 auto;
+    min-height: 15.75rem;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col:first-child > div:last-child > div:last-child {
+    padding: 1rem 1.05rem !important;
+    font-size: 0.84rem !important;
+    line-height: 1.85 !important;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col:last-child > div:last-child {
+    padding: 1rem 1.05rem !important;
+    margin-top: 0 !important;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col:last-child > div:last-child > div:first-child {
+    font-size: 0.72rem !important;
+    margin-bottom: 0.6rem !important;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col:last-child .anim-flow {
+    height: 8.8rem !important;
+    justify-content: space-between !important;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col:last-child .anim-flow .agent-box {
+    min-width: 6rem;
+    padding: 0.75rem 0.85rem !important;
+    font-size: 0.74rem !important;
+}
+
+.slide[data-slide-index="10"] .layout-2col > .col:last-child .anim-flow [style*="font-size:0.56rem"],
+.slide[data-slide-index="10"] .layout-2col > .col:last-child .anim-flow [style*="font-size:0.5rem"] {
+    font-size: 0.66rem !important;
+}
+
 /* 现场挑战页把右下流程链路抬上来并放大，避免悬空。 */
 .slide[data-slide-index="20"] .slide-fit-body {
     justify-content: center;
@@ -590,6 +883,330 @@ body {
 
 .slide[data-slide-index="12"] .pillar-desc {
     gap: 0.85rem;
+}
+
+/* Part 3.2：三列模型卡改成满高阅读面板，避免下半页空。 */
+.slide[data-slide-index="12"] .pillars-container {
+    flex: 1 1 auto;
+    gap: 1rem !important;
+}
+
+.slide[data-slide-index="12"] .pillar-card {
+    min-height: 0;
+    height: 100%;
+    padding: 1.6rem 1.25rem 1.35rem;
+    gap: 1rem;
+    align-items: stretch;
+    text-align: left;
+}
+
+.slide[data-slide-index="12"] .pillar-card h3 {
+    font-size: 1.22rem;
+    margin-bottom: 0.25rem;
+    text-align: center;
+}
+
+.slide[data-slide-index="12"] .pillar-desc {
+    gap: 0.95rem;
+    font-size: 0.82rem;
+    justify-content: space-between;
+}
+
+.slide[data-slide-index="12"] .pillar-desc p {
+    font-size: 0.88rem !important;
+    margin-bottom: 0.15rem;
+    text-align: center;
+}
+
+.slide[data-slide-index="12"] .pillar-desc ul {
+    margin: 0;
+    width: 100%;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1.05rem !important;
+    padding-top: 0.9rem;
+    padding-right: 0.9rem;
+    padding-bottom: 0.9rem;
+    background: rgba(20, 22, 40, 0.52);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.slide[data-slide-index="12"] .pillar-desc li {
+    font-size: 0.86rem;
+    line-height: 1.78 !important;
+    margin-bottom: 0.15rem;
+}
+
+.slide[data-slide-index="12"] .pillar-desc > div:last-child {
+    padding: 0.95rem 1rem !important;
+    margin-top: auto !important;
+}
+
+.slide[data-slide-index="12"] .pillar-desc > div:last-child div:first-child {
+    font-size: 0.68rem !important;
+    margin-bottom: 0.35rem !important;
+}
+
+.slide[data-slide-index="12"] .pillar-desc > div:last-child div:nth-child(2) {
+    font-size: 0.74rem !important;
+}
+
+.slide[data-slide-index="12"] .pillar-desc > div:last-child div:last-child {
+    font-size: 0.72rem !important;
+}
+
+/* Part 3.4：放大 API 网关图和右侧截图，让两列更接近满高。 */
+.slide[data-slide-index="14"] .slide-fit-body {
+    justify-content: center;
+    gap: 0.85rem;
+}
+
+.slide[data-slide-index="14"] .layout-2col {
+    flex: 1 1 auto;
+    grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
+    align-items: stretch !important;
+    gap: 1.2rem !important;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col {
+    justify-content: space-between;
+    gap: 0.9rem;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col:last-child {
+    justify-content: flex-start;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col:first-child > div:first-child {
+    flex: 0 0 auto;
+    padding: 1rem 1.1rem !important;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col:first-child > div:first-child > div:first-child {
+    font-size: 0.78rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col:first-child .anim-flow {
+    height: 9rem !important;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col:first-child .anim-flow .agent-box {
+    min-width: 6.2rem;
+    padding: 0.75rem 0.9rem !important;
+    font-size: 0.74rem !important;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col:first-child img[src*="part3_svg_api_gateway.svg"] {
+    width: 100%;
+    height: 12.6rem;
+    max-height: none !important;
+    padding: 0.75rem;
+}
+
+.slide[data-slide-index="14"] .layout-2col > .col:last-child img {
+    width: 100%;
+    height: 19.2rem;
+    min-height: 19.2rem;
+    object-fit: contain;
+    object-position: center top;
+    background: transparent;
+    padding: 0;
+    border: 0;
+}
+
+.slide[data-slide-index="14"] .slide-fit-body > .fade-up.delay-3 {
+    margin-top: 0 !important;
+}
+
+.slide[data-slide-index="14"] .slide-fit-body > .fade-up.delay-3 a > div {
+    min-height: 5.4rem;
+    padding: 0.95rem 1rem !important;
+}
+
+.slide[data-slide-index="14"] .slide-fit-body > .fade-up.delay-3 a > div > div:first-child {
+    font-size: 0.82rem !important;
+}
+
+.slide[data-slide-index="14"] .slide-fit-body > .fade-up.delay-3 a > div > div:last-child {
+    font-size: 0.68rem !important;
+    line-height: 1.5;
+}
+
+/* Part 4.0：把完整工作流上抬并增高，让步骤卡真正成为主角。 */
+.slide[data-slide-index="15"] .slide-fit-body {
+    justify-content: flex-start;
+    gap: 0.7rem;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:first-child {
+    min-height: 12.4rem;
+    padding: 1.15rem 1.3rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:first-child > div:first-child {
+    font-size: 0.74rem !important;
+    margin-bottom: 0.95rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:first-child .anim-flow {
+    height: 10.4rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:first-child .agent-box {
+    min-width: 6.3rem !important;
+    padding: 0.8rem 0.92rem !important;
+    font-size: 0.75rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:first-child .agent-box div[style*="font-size:1.2rem"] {
+    font-size: 1.45rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:first-child .agent-box div[style*="font-size:0.56rem"] {
+    font-size: 0.68rem !important;
+    line-height: 1.45;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > .layout-2col {
+    flex: 0 0 auto;
+    min-height: 5.6rem;
+    gap: 1rem !important;
+    margin-top: 0 !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > .layout-2col .glass-box {
+    min-height: 5.1rem;
+    padding: 0.95rem 1.15rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > .layout-2col .glass-text {
+    font-size: 0.88rem !important;
+    line-height: 1.55;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:last-child {
+    min-height: 10.2rem;
+    margin-top: 0.2rem !important;
+    gap: 0.9rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:last-child > div {
+    min-height: 10.2rem;
+    padding: 1rem 1rem 0.95rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:last-child > div > div:first-child {
+    font-size: 0.86rem !important;
+    margin-bottom: 0.7rem !important;
+}
+
+.slide[data-slide-index="15"] .slide-fit-body > div:last-child ul {
+    padding-left: 1rem !important;
+    font-size: 0.78rem !important;
+    line-height: 1.85 !important;
+}
+
+/* Part 4.4 & 4.5：把安装验证页做成上下饱满的操作面板。 */
+.slide[data-slide-index="18"] .slide-fit-body {
+    justify-content: space-between;
+    gap: 0.85rem;
+}
+
+.slide[data-slide-index="18"] .layout-2col {
+    flex: 1 1 auto;
+    align-items: stretch !important;
+    gap: 1.2rem !important;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col {
+    justify-content: space-between;
+    gap: 0.9rem;
+}
+
+.slide[data-slide-index="18"] h3 {
+    font-size: 0.96rem !important;
+    margin-bottom: 0.35rem !important;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:first-child > div:first-child {
+    flex: 1 1 auto;
+    min-height: 16rem;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:first-child > div:first-child > div:last-child {
+    padding: 1rem 1.05rem !important;
+    font-size: 0.84rem !important;
+    line-height: 1.82 !important;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:first-child .glass-box {
+    min-height: 5rem;
+    margin-top: 0 !important;
+    padding: 1rem 1.1rem !important;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:first-child .glass-text {
+    font-size: 0.86rem !important;
+    line-height: 1.55;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:last-child .shifts-list {
+    flex: 1 1 auto;
+    gap: 0.85rem;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:last-child .shift-item {
+    min-height: 5.3rem;
+    padding: 0.95rem 1rem;
+    gap: 0.95rem;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:last-child .shift-badge {
+    font-size: 0.72rem !important;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:last-child .shift-content h4 {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin-bottom: 0.35rem;
+}
+
+.slide[data-slide-index="18"] .layout-2col > .col:last-child .shift-content p {
+    font-size: 0.78rem !important;
+    line-height: 1.55;
+}
+
+.slide[data-slide-index="18"] .slide-fit-body > .fade-up.delay-3 {
+    margin-top: 0 !important;
+    padding: 1rem 1.15rem !important;
+}
+
+.slide[data-slide-index="18"] .slide-fit-body > .fade-up.delay-3 > div:first-child {
+    font-size: 0.72rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.slide[data-slide-index="18"] .slide-fit-body > .fade-up.delay-3 > div:last-child {
+    gap: 0.85rem !important;
+}
+
+.slide[data-slide-index="18"] .slide-fit-body > .fade-up.delay-3 > div:last-child > div {
+    min-height: 5.5rem;
+    padding: 0.9rem 1rem !important;
+}
+
+.slide[data-slide-index="18"] .slide-fit-body > .fade-up.delay-3 > div:last-child > div > div:first-child {
+    font-size: 0.82rem !important;
+}
+
+.slide[data-slide-index="18"] .slide-fit-body > .fade-up.delay-3 > div:last-child > div > div:last-child {
+    font-size: 0.7rem !important;
+    line-height: 1.55;
 }
 
 .slide[data-slide-index="20"] .layout-2col {
