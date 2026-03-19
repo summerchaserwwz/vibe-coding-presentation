@@ -7,7 +7,7 @@
     const timelineItems = Array.from(document.querySelectorAll('#outline-timeline .timeline-item'));
     const tabs = Array.from(document.querySelectorAll('.tab'));
     const slideContainer = document.querySelector('.slide-container');
-    const partStartIndices = [0, 5, 9, 14];
+    const partStartIndices = [1, 6, 10, 15];
     let currentIndex = 0;
 
     prepareSlideCanvases(slides);
@@ -190,14 +190,15 @@
             nextBtn.disabled = currentIndex === slides.length - 1;
         }
 
-        timelineItems.forEach((item, index) => {
-            item.classList.toggle('active-sub', index === currentIndex);
+        timelineItems.forEach((item) => {
+            const targetIndex = Number.parseInt(item.dataset.target ?? '', 10);
+            item.classList.toggle('active-sub', targetIndex === currentIndex);
         });
 
         const activePartIndex =
-            currentIndex < 5 ? 0 :
-            currentIndex < 9 ? 1 :
-            currentIndex < 14 ? 2 : 3;
+            currentIndex < partStartIndices[1] ? 0 :
+            currentIndex < partStartIndices[2] ? 1 :
+            currentIndex < partStartIndices[3] ? 2 : 3;
 
         tabs.forEach((tab, index) => {
             tab.classList.toggle('active', index === activePartIndex);
