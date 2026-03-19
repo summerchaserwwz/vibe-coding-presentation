@@ -66,8 +66,10 @@
      * 这样可以在不重写现有 HTML 的前提下，让主体区自动吃满剩余高度。
      */
     function prepareSlideCanvases(slideNodes) {
-        slideNodes.forEach((slide) => {
+        slideNodes.forEach((slide, index) => {
             const firstElement = slide.firstElementChild;
+
+            slide.dataset.slideIndex = String(index + 1);
 
             if (firstElement && firstElement.classList.contains('slide-fit-shell')) {
                 return;
