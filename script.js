@@ -1,52 +1,218 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.slide');
+﻿document.addEventListener('DOMContentLoaded', () => {
+    const slides = Array.from(document.querySelectorAll('.slide'));
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
     const currentSpan = document.querySelector('.current');
     const totalSpan = document.querySelector('.total');
-    const timelineItems = document.querySelectorAll('#outline-timeline .timeline-item');
-    const tabs = document.querySelectorAll('.tab');
-    let cur = 0;
-    const N = slides.length;
-    if (totalSpan) totalSpan.textContent = String(N).padStart(2,'0');
+    const timelineItems = Array.from(document.querySelectorAll('#outline-timeline .timeline-item'));
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const slideContainer = document.querySelector('.slide-container');
+    const partStartIndices = [0, 5, 9, 14];
+    let currentIndex = 0;
+
+    prepareSlideCanvases(slides);
+
+    if (totalSpan) {
+        totalSpan.textContent = String(slides.length).padStart(2, '0');
+    }
+
+    if (prevBtn) {
+        prevBtn.onclick = () => go(currentIndex - 1);
+    }
+
+    if (nextBtn) {
+        nextBtn.onclick = () => go(currentIndex + 1);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+            go(currentIndex - 1);
+            return;
+        }
+
+        if (event.key === 'ArrowRight' || event.key === ' ') {
+            event.preventDefault();
+            go(currentIndex + 1);
+            return;
+        }
+
+        if (event.key >= '1' && event.key <= '4') {
+            go(partStartIndices[Number(event.key) - 1]);
+        }
+    });
+
+    timelineItems.forEach((item) => {
+        item.addEventListener('click', () => {
+            const targetIndex = Number.parseInt(item.dataset.target ?? '', 10);
+
+            if (!Number.isNaN(targetIndex)) {
+                go(targetIndex);
+            }
+        });
+    });
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            const partIndex = Number.parseInt(tab.dataset.part ?? '', 10);
+            go(partStartIndices[partIndex]);
+        });
+    });
+
+    const refreshSlideLayout = bindResponsiveLayout(slideContainer, slides);
     sync();
 
-    if (prevBtn) prevBtn.onclick = () => go(cur - 1);
-    if (nextBtn) nextBtn.onclick = () => go(cur + 1);
-    document.addEventListener('keydown', e => {
-        if (e.key==='ArrowLeft') go(cur-1);
-        else if (e.key==='ArrowRight'||e.key===' ') { e.preventDefault(); go(cur+1); }
-        else if (e.key>='1'&&e.key<='4') go([0,5,9,14][+e.key-1]);
-    });
-    timelineItems.forEach(it => it.addEventListener('click', () => {
-        const t = parseInt(it.dataset.target); if(!isNaN(t)) go(t);
-    }));
-    tabs.forEach(tab => tab.addEventListener('click', () => {
-        go([0,5,9,14][parseInt(tab.dataset.part)]);
-    }));
+    /**
+     * 将每一页的标题区与主体区拆开，统一交给 CSS 布局系统处理。
+     * 这样可以在不重写现有 HTML 的前提下，让主体区自动吃满剩余高度。
+     */
+    function prepareSlideCanvases(slideNodes) {
+        slideNodes.forEach((slide) => {
+            const firstElement = slide.firstElementChild;
 
-    function go(idx) {
-        if (idx<0||idx>=N||idx===cur) return;
-        slides[cur].classList.remove('active');
-        slides[cur].classList.add(idx>cur?'prev':'next');
-        cur = idx;
-        slides[cur].classList.remove('prev','next');
-        void slides[cur].offsetWidth;
-        slides[cur].classList.add('active');
+            if (firstElement && firstElement.classList.contains('slide-fit-shell')) {
+                return;
+            }
+
+            const shell = document.createElement('div');
+            const header = document.createElement('div');
+            const body = document.createElement('div');
+            const nodes = Array.from(slide.childNodes);
+
+            shell.className = 'slide-fit-shell';
+            header.className = 'slide-fit-header';
+            body.className = 'slide-fit-body';
+
+            nodes.forEach((node) => {
+                if (node.nodeType === Node.TEXT_NODE && !node.textContent?.trim()) {
+                    return;
+                }
+
+                const element = node.nodeType === Node.ELEMENT_NODE ? node : null;
+                const isHeaderNode = Boolean(
+                    element &&
+                    (
+                        element.classList.contains('tag-row') ||
+                        element.classList.contains('slide-title') ||
+                        element.classList.contains('subtitle')
+                    )
+                );
+
+                if (isHeaderNode) {
+                    header.appendChild(node);
+                    return;
+                }
+
+                body.appendChild(node);
+            });
+
+            shell.appendChild(header);
+            shell.appendChild(body);
+            slide.appendChild(shell);
+        });
+    }
+
+    /**
+     * 监听窗口和画布尺寸变化，为当前宽高比切换紧凑模式。
+     * 紧凑模式只在确实发生溢出时生效，正常比例下仍保持原视觉风格。
+     */
+    function bindResponsiveLayout(container, slideNodes) {
+        const refresh = () => {
+            slideNodes.forEach(updateSlideOverflowState);
+        };
+
+        const queueRefresh = () => {
+            window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(refresh);
+            });
+        };
+
+        window.addEventListener('resize', queueRefresh);
+
+        if (typeof ResizeObserver === 'function' && container) {
+            const resizeObserver = new ResizeObserver(queueRefresh);
+            resizeObserver.observe(container);
+        }
+
+        if (document.fonts?.ready) {
+            document.fonts.ready.then(queueRefresh).catch(() => {});
+        }
+
+        queueRefresh();
+        return queueRefresh;
+    }
+
+    /**
+     * 当主体内容滚动尺寸超过可用尺寸时，为该页打上紧凑模式标记。
+     * 这样浏览器缩放或小尺寸屏幕下不会再把内容顶出中间画布。
+     */
+    function updateSlideOverflowState(slide) {
+        const body = slide.querySelector('.slide-fit-body');
+
+        if (!body) {
+            return;
+        }
+
+        slide.classList.remove('slide-compact');
+
+        const overflowY = body.scrollHeight - body.clientHeight;
+        const overflowX = body.scrollWidth - body.clientWidth;
+        const isCompact = overflowY > 6 || overflowX > 6;
+
+        slide.classList.toggle('slide-compact', isCompact);
+    }
+
+    function go(nextIndex) {
+        if (nextIndex < 0 || nextIndex >= slides.length || nextIndex === currentIndex) {
+            return;
+        }
+
+        slides[currentIndex].classList.remove('active');
+        slides[currentIndex].classList.add(nextIndex > currentIndex ? 'prev' : 'next');
+        currentIndex = nextIndex;
+        slides[currentIndex].classList.remove('prev', 'next');
+        void slides[currentIndex].offsetWidth;
+        slides[currentIndex].classList.add('active');
         sync();
     }
+
     function sync() {
-        if (currentSpan) currentSpan.textContent = String(cur+1).padStart(2,'0');
-        if (prevBtn) prevBtn.disabled = cur===0;
-        if (nextBtn) nextBtn.disabled = cur===N-1;
-        timelineItems.forEach((it,i) => it.classList.toggle('active-sub', i===cur));
-        const p = cur<5?0:cur<9?1:cur<14?2:3;
-        tabs.forEach((tab,i) => {
-            tab.classList.toggle('active', i===p);
-            const fill = tab.querySelector('.tab-progress-fill');
-            const st = tab.querySelector('.part-status');
-            if (fill) fill.style.width = i<=p?'100%':'0%';
-            if (st) { st.textContent=i<=p?'Loaded':'Pending'; st.className='part-status '+(i<=p?'success':'pending'); }
+        if (currentSpan) {
+            currentSpan.textContent = String(currentIndex + 1).padStart(2, '0');
+        }
+
+        if (prevBtn) {
+            prevBtn.disabled = currentIndex === 0;
+        }
+
+        if (nextBtn) {
+            nextBtn.disabled = currentIndex === slides.length - 1;
+        }
+
+        timelineItems.forEach((item, index) => {
+            item.classList.toggle('active-sub', index === currentIndex);
         });
+
+        const activePartIndex =
+            currentIndex < 5 ? 0 :
+            currentIndex < 9 ? 1 :
+            currentIndex < 14 ? 2 : 3;
+
+        tabs.forEach((tab, index) => {
+            tab.classList.toggle('active', index === activePartIndex);
+
+            const fill = tab.querySelector('.tab-progress-fill');
+            const status = tab.querySelector('.part-status');
+
+            if (fill) {
+                fill.style.width = index <= activePartIndex ? '100%' : '0%';
+            }
+
+            if (status) {
+                status.textContent = index <= activePartIndex ? 'Loaded' : 'Pending';
+                status.className = `part-status ${index <= activePartIndex ? 'success' : 'pending'}`;
+            }
+        });
+
+        refreshSlideLayout();
     }
 });
